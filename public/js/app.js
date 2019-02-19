@@ -13,9 +13,10 @@ var app = angular.module('StyraxApp', ['firebase']);
 
 app.controller('AppController', function($scope, $firebaseObject, $firebaseAuth) {
   const rootRef = firebase.database().ref().child('angular');
-  const ref = rootRef.child('object');
+  const ref = rootRef.child('users');
   this.object = $firebaseObject(ref);
 
-  $scope.users =
+  console.log(this.object);
+
   $scope.val = "Hello";
 });
