@@ -17,6 +17,12 @@
   		function hideURLbar() {
   			window.scrollTo(0, 1);
   		}
+
+      function handleSignUp() {
+        var userEmail = document.getElementByID("email_field").value;
+        var userPass = document.getElementByID("password_field").value;
+        window.alert(userEmail + " " + userPass);
+      }
   	</script>
   	<!--//tags -->
   	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -534,14 +540,14 @@
     							<a href="#" data-toggle="modal" data-target="#myModal2">
     								Sign Up Now</a>
     						</p>
-    						<form action="#" method="post">
+    						<form action="#" method="post" ng-controller="SignInController as signin">
     							<div class="styled-input agile-styled-input-top">
-    								<input type="text" placeholder="User Name" name="Name" required="">
+    								<input type="text" ng-model="signin.user.email" placeholder="User Name" name="Name" required="">
     							</div>
     							<div class="styled-input">
-    								<input type="password" placeholder="Password" name="password" required="">
+    								<input type="password"ng-model="signin.user.password" placeholder="Password" name="password" required="" >
     							</div>
-    							<input type="submit" value="Sign In">
+    							<input type="submit" ng-click="signin.handleSignIn()" value="Sign In">
     						</form>
     						<div class="clearfix"></div>
     					</div>
@@ -571,20 +577,20 @@
     						<p>
     							Come join the Grocery Shoppy! Let's set up your Account.
     						</p>
-    						<form action="#" method="post">
+    						<form action="#" method="post" ng-controller="SignupController as signup">
     							<div class="styled-input agile-styled-input-top">
-    								<input type="text" placeholder="Name" name="Name" required="">
+    								<input ng-model="signup.newUser.name" type="text" placeholder="Name" name="Name" required="">
     							</div>
     							<div class="styled-input">
-    								<input type="email" placeholder="E-mail" name="Email" required="">
+    								<input ng-model="signup.newUser.email" type="email" placeholder="E-mail" name="Email" required="">
     							</div>
     							<div class="styled-input">
-    								<input type="password" placeholder="Password" name="password" id="password1" required="">
+    								<input ng-model="signup.newUser.password1" type="password" placeholder="Password" name="password" id="password1" required="">
     							</div>
     							<div class="styled-input">
-    								<input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
+    								<input ng-model="signup.newUser.password2" type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
     							</div>
-    							<input type="submit" value="Sign Up">
+    							<input ng-click="signup.handleSignUp()" type="submit" value="Sign Up">
     						</form>
     						<p>
     							<a href="#">By clicking register, I agree to your terms</a>

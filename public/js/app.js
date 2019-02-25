@@ -20,3 +20,40 @@ app.controller('AppController', function($scope, $firebaseObject, $firebaseAuth)
 
   $scope.val = "Hello";
 });
+
+app.controller('SignInController', function($scope, $firebaseAuth) {
+  var firebaseAuthObject = $firebaseAuth();
+  this.user = {};
+
+  this.handleSignIn = function () {
+    firebaseAuthObject.$signInWithEmailAndPassword(this.user.email, this.user.password);
+    window.alert("Success")
+  }
+})
+
+app.controller('SignupController', function($scope, $firebaseAuth) {
+  var firebaseAuthObject = $firebaseAuth();
+  this.newUser = {};
+
+  this.handleSignUp = function () {
+    if (this.newUser.password1 == this.newUser.password2) {
+      let password = this.newUser.password1;
+      let email = this.newUser.email;
+
+      firebaseAuthObject.$createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+
+    }
+  }
+})
